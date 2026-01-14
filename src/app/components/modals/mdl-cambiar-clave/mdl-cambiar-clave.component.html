@@ -1,0 +1,85 @@
+<div class="modal-header">
+  <!--begin::Modal title-->
+  <h2>Cambiar contraseña</h2>
+  <!--end::Modal title-->
+  <!--begin::Close-->
+  <div class="btn btn-sm btn-icon btn-active-color-primary" (click)="bsModalRef.hide()">
+    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+    <span class="svg-icon svg-icon-1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+      </svg>
+    </span>
+    <!--end::Svg Icon-->
+  </div>
+  <!--end::Close-->
+</div>
+<!--end::Modal header-->
+<!--begin::Modal body-->
+<div class="modal-body mx-5 mx-xl-15 my-7">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" >
+    <!--begin::Heading-->
+    <div class="alert alert-primary d-flex align-items-center p-5 mb-10 border-0">
+        <span class="svg-icon svg-icon-2hx svg-icon-primary me-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="currentColor"></path>
+            <path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="currentColor"></path>
+          </svg>
+        </span>
+      <div class="d-flex flex-column">
+        <h4 class="mb-1 text-primary">Aviso</h4>
+        <span>Luego de cambiar su contraseña, el sistema cerrara sesión automaticamente por seguridad.</span>
+      </div>
+    </div>
+
+    <div class="text-center mb-10">
+      <h1 class="text-dark mb-3">Configurar nueva contraseña</h1>
+    </div>
+
+
+    <div class="mb-10 fv-row fv-plugins-icon-container" >
+
+      <div class="mb-1">
+        <label class="form-label fw-bolder text-dark fs-6 required">Actual contraseña</label>
+        <div class="position-relative mb-3">
+          <input class="form-control form-control-lg form-control-solid form-control-icon" [type]="showOldPassword ? 'text' : 'password'" placeholder="" autocomplete="off" formControlName="oldPassword" [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.oldPassword.errors}">
+          <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"  (click)="changeOldPassword()">
+              <i *ngIf="!showOldPassword" class="bi bi-eye-slash fs-2"></i>
+              <i *ngIf="showOldPassword" class="bi bi-eye fs-2"></i>
+          </span>
+        </div>
+        <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.oldPassword.hasError('required')">Ingresar la contraseña actual</div>
+      </div>
+
+      <div class="mb-1">
+        <label class="form-label fw-bolder text-dark fs-6 required">Nueva contraseña</label>
+        <div class="position-relative mb-3">
+          <input class="form-control form-control-lg form-control-solid form-control-icon" [type]="showPassword ? 'text' : 'password'" placeholder="" autocomplete="off" formControlName="newPassword" [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.newPassword.errors}">
+          <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"  (click)="changePassword()">
+              <i *ngIf="!showPassword" class="bi bi-eye-slash fs-2"></i>
+              <i *ngIf="showPassword" class="bi bi-eye fs-2"></i>
+          </span>
+        </div>
+        <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.newPassword.errors?.required">Ingresar la nueva contraseña</div>
+      </div>
+
+      <div class="fv-row mb-1 fv-plugins-icon-container">
+        <label class="form-label fw-bolder text-dark fs-6 required">Confirmar contraseña</label>
+        <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" autocomplete="off" formControlName="repeatPassword" [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.repeatPassword.errors}">
+      </div>
+      <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.repeatPassword.errors?.required">Confirmar la nueva contraseña</div>
+      <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.repeatPassword.errors?.confirmedValidator">Debe ser igual a la nueva contraseña</div>
+
+      <div class="text-center pt-15 w-100 mb-5">
+        <button matRipple type="reset" class="btn btn-light me-3" (click)="bsModalRef.hide()">Cancelar</button>
+        <button [disabled]="loadingSubmit" matRipple type="submit" class="btn btn-primary" [attr.data-kt-indicator]="submitted && loadingSubmit">
+          <span class="indicator-label">Actualizar</span>
+          <span class="indicator-progress">Porfavor espere...
+          <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+        </button>
+      </div>
+
+    </div>
+  </form>
+</div>

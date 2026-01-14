@@ -1,0 +1,122 @@
+<div class="modal-header">
+  <!--begin::Modal title-->
+  <h2>{{ proveedor ? 'Editar' : 'Nuevo' }} Proveedor</h2>
+  <!--end::Modal title-->
+  <!--begin::Close-->
+  <div class="btn btn-sm btn-icon btn-active-color-primary" (click)="bsModalRef.hide()">
+    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+    <span class="svg-icon svg-icon-1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+      </svg>
+    </span>
+    <!--end::Svg Icon-->
+  </div>
+  <!--end::Close-->
+</div>
+<!--end::Modal header-->
+<!--begin::Modal body-->
+<div class="modal-body mx-5 mx-xl-15 my-7">
+  <!--begin::Form-->
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+    <div class="row row-cols-md-2">
+      <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+          <span class="required">R.U.C</span>
+          <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="R.U.C del proveedor"></i>
+        </label>
+        <input maxlength="20" type="text" class="form-control form-control-solid" placeholder="" formControlName="ruc" [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.ruc.errors?.required}">
+        <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.ruc.errors?.required">Ingresar el ruc del proveedor</div>
+      </div>
+
+      <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+          <span class="required">Razón Social</span>
+          <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Razón Social del proveedor"></i>
+        </label>
+        <input maxlength="100" type="text" class="form-control form-control-solid" placeholder="" formControlName="razonSocial" [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.razonSocial.errors?.required}">
+        <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.razonSocial.errors?.required">Ingresar la razón social del proveedor</div>
+      </div>
+
+      <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+          <span>Contacto : Nombre</span>
+          <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Nombre del contacto de proveedor"></i>
+        </label>
+        <input maxlength="100" type="text" class="form-control form-control-solid" placeholder="" formControlName="contactoNombre" [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.contactoNombre.errors?.required}">
+      </div>
+
+      <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+          <span>Contacto : Apellido</span>
+          <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Apellido del contacto de proveedor"></i>
+        </label>
+        <input maxlength="100" type="text" class="form-control form-control-solid" placeholder="" formControlName="contactoApellido" [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.contactoApellido.errors?.required}">
+      </div>
+
+      <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+          <span>Contacto : Teléfono</span>
+          <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Teléfono del contacto de proveedor"></i>
+        </label>
+        <input maxlength="15" type="text" class="form-control form-control-solid" placeholder="" formControlName="contactoTelefono" [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.contactoTelefono.errors?.required}">
+      </div>
+
+      <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+          <span>Contacto : Correo</span>
+          <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Correo del contacto de proveedor"></i>
+        </label>
+        <input maxlength="50" type="email" class="form-control form-control-solid" placeholder="" formControlName="contactoCorreo" [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.contactoCorreo.errors?.required}">
+      </div>
+
+      <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+          <span>Ubicación</span>
+          <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Seleccionar la ubicación"></i>
+        </label>
+        <div class="position-relative" (click)="openUbigeo()" [tooltip]="f.ubigeo.value ? f.ubigeo.value : 'No registra ubicación'">
+          <input type="hidden" formControlName="direccion">
+          <input type="hidden" formControlName="idUbicacion">
+          <input readonly type="text" class="form-control form-control-solid cursor-pointer pe-13" placeholder="Seleccionar" formControlName="ubigeo" >
+          <span class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 me-4" data-kt-search-element="clear">
+              <span class="svg-icon svg-icon-2 me-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                  <path fill="currentColor" opacity=".3" d="M192 0C86 0 0 86 0 192c0 77.41 27 99 172.27 309.67a24 24 0 0 0 39.46 0C357 291 384 269.41 384 192 384 86 298 0 192 0zm0 288a96 96 0 1 1 96-96 96 96 0 0 1-96 96z"/>
+                  <path fill="currentColor" d="M192 256a64 64 0 1 1 64-64 64 64 0 0 1-64 64z" />
+                </svg>
+              </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column mb-7 fv-row" >
+        <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+          <span class="required">Estado</span>
+          <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Estado del artículo en el sistema"></i>
+        </label>
+        <select class="form-select form-select-solid" formControlName="idEstado" required >
+          <option [value]="0">Inactivo</option>
+          <option [value]="1">Activo</option>
+        </select>
+      </div>
+
+
+      <div class="text-center pt-15 w-100">
+        <button matRipple type="reset" class="btn btn-light me-3" (click)="bsModalRef.hide()">Cancelar</button>
+        <button [disabled]="loadingSubmit" matRipple type="submit" class="btn btn-primary" [attr.data-kt-indicator]="submitted && loadingSubmit">
+          <span class="indicator-label">Guardar</span>
+          <span class="indicator-progress">Porfavor espere...
+          <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+        </button>
+      </div>
+    </div>
+
+
+
+    <!--end::Actions-->
+    </form>
+  <!--end::Form-->
+</div>

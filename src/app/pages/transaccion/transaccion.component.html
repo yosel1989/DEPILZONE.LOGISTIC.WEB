@@ -1,0 +1,221 @@
+<!--begin::Header-->
+<div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+  <!--begin::Container-->
+  <div class="container-fluid d-flex align-items-center justify-content-between" id="kt_header_container">
+    <!--begin::Page title-->
+    <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap mt-n5 mt-lg-0 me-lg-2 pb-2 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
+      <!--begin::Heading-->
+      <h1 class="text-dark fw-bolder my-0 fs-2">Transacción</h1>
+      <!--end::Heading-->
+      <!--begin::Breadcrumb-->
+      <ul class="breadcrumb fw-bold fs-base my-1">
+        <li class="breadcrumb-item text-muted">
+          <a  routerLink="/" class="text-muted">Inicio</a>
+        </li>
+        <li class="breadcrumb-item text-muted">Transacción</li>
+        <li class="breadcrumb-item text-dark">Listado de trasacciones</li>
+      </ul>
+      <!--end::Breadcrumb-->
+    </div>
+    <!--end::Page title=-->
+    <!--begin::Wrapper-->
+    <div class="d-flex d-lg-none align-items-center ms-n2 me-2">
+      <!--begin::Aside mobile toggle-->
+      <div class="btn btn-icon btn-active-icon-primary" id="kt_aside_toggle">
+        <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
+        <span class="svg-icon svg-icon-1">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+											<path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="currentColor" />
+											<path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="currentColor" />
+										</svg>
+									</span>
+        <!--end::Svg Icon-->
+      </div>
+      <!--end::Aside mobile toggle-->
+      <!--begin::Logo-->
+      <a href="index-2.html" class="d-flex align-items-center">
+        <img alt="Logo" src="assets/media/logos/logo-demo7.svg" class="h-30px" />
+      </a>
+      <!--end::Logo-->
+    </div>
+    <!--end::Wrapper-->
+    <!--begin::Toolbar wrapper-->
+    <div class="d-flex flex-shrink-0">
+      <div class="d-flex align-items-center ms-3">
+        <button matRipple class="btn btn-icon btn-bg-light flex-center btn-color-success btn-active-color-success h-40px" tooltip="Nueva Transacción" placement="start" (click)="onCreate()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24" fill="none">
+            <path fill="currentColor" opacity=".3" d="M206.75,334.76c1.67,27.78,8.02,54.29,18.29,78.76h-94.6l37.5,34.12c11.85,11.21,12.36,29.91,1.14,41.75-.19,.2-.37,.39-.56,.58l-13.3,13.38c-11.53,11.53-30.23,11.53-41.77,0L11.54,401.99c-15.38-15.38-15.38-40.31,0-55.69h0l101.92-101.37c11.53-11.53,30.23-11.53,41.77,0l13.38,13.38c11.53,11.53,11.54,30.23,0,41.77-.19,.19-.38,.38-.58,.56l-37.57,34.12h76.3Zm433.25-14.76c0,106.06-85.94,192-192,192s-192-85.94-192-192,85.94-192,192-192,192,85.94,192,192Z"/>
+            <path fill="currentColor" d="M252.94,177.24H29.54C13.23,177.24,0,164.02,0,147.71v-19.69C0,111.71,13.23,98.48,29.54,98.48H351.16c-39.31,17.2-73.15,44.56-98.22,78.76Zm372.68-21.18c7.76-14.85,5.4-33.61-7.07-46.08L516.62,8.65c-11.53-11.53-30.23-11.53-41.77,0l-13.34,13.38c-.19,.19-.38,.38-.56,.58-11.21,11.85-10.7,30.54,1.14,41.75l17.6,16c57.44,7.52,108.52,35.2,145.92,75.7Zm-66.13,142.27c0-5.13-4.16-9.29-9.29-9.29h-71.23v-71.23c0-5.13-4.16-9.29-9.29-9.29h-43.35c-5.13,0-9.29,4.16-9.29,9.29v71.23h-71.23c-5.13,0-9.29,4.16-9.29,9.29v43.35c0,5.13,4.16,9.29,9.29,9.29h71.23v71.23c0,5.13,4.16,9.29,9.29,9.29h43.35c5.13,0,9.29-4.16,9.29-9.29v-71.23h71.23c5.13,0,9.29-4.16,9.29-9.29v-43.35Z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="d-flex align-items-center ms-3">
+        <button [disabled]="!selected" matRipple class="btn btn-icon btn-bg-light flex-center btn-color-success btn-active-color-success h-40px" tooltip="Ver Transacción" placement="start" (click)="onShow()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 576 512">
+            <path fill="currentColor" opacity=".3" d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288.14 400H288a143.93 143.93 0 1 1 .14 0z"/>
+            <path fill="currentColor" d="M380.66 280.87a95.78 95.78 0 1 1-184.87-50.18 47.85 47.85 0 0 0 66.9-66.9 95.3 95.3 0 0 1 118 117.08z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="d-flex align-items-center ms-3">
+        <button [disabled]="!selected" matRipple class="btn btn-icon btn-bg-light flex-center btn-color-primary btn-active-color-primary h-40px" tooltip="Confirmar Transacción" placement="start" (click)="onConfirm()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24">
+            <path fill="currentColor" opacity=".3" d="M207.42,334.76c1.68,27.79,8.04,54.3,18.34,78.76h-95.31l37.5,34.12c11.85,11.21,12.36,29.91,1.14,41.75-.19,.2-.37,.39-.56,.58l-13.3,13.38c-11.53,11.53-30.23,11.53-41.77,0L11.54,401.99c-15.38-15.38-15.38-40.31,0-55.69h0l101.92-101.37c11.53-11.53,30.23-11.53,41.77,0l13.38,13.38c11.53,11.53,11.54,30.23,0,41.77-.19,.19-.38,.38-.58,.56l-37.57,34.12h76.97Zm240.58-206.76c-106.06,0-192,85.94-192,192s85.94,192,192,192,192-85.94,192-192-85.94-192-192-192Z"/>
+            <path fill="currentColor" d="M253.75,177.24H29.53C13.22,177.24,0,164.02,0,147.71v-19.69C0,111.71,13.22,98.48,29.53,98.48H352.75c-39.63,17.06-73.75,44.44-99.01,78.76Zm371.56-20.64c8.11-14.93,5.86-34-6.77-46.63L516.62,8.65c-11.53-11.53-30.23-11.53-41.77,0l-13.34,13.38c-.19,.19-.38,.38-.56,.58-11.21,11.85-10.7,30.54,1.14,41.75l18.41,16.74c57,7.67,107.68,35.24,144.81,75.51Zm-199.52,252.14c-4.84,4.83-12.68,4.83-17.51,0l-80.52-80.52c-4.83-4.84-4.83-12.68,0-17.51l17.51-17.52c4.84-4.84,12.68-4.84,17.52,0h0l54.24,54.24,116.18-116.18c4.84-4.84,12.68-4.84,17.52,0h0l17.51,17.52c4.83,4.84,4.83,12.68,0,17.51l-142.45,142.45Z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="d-flex align-items-center ms-3">
+        <button [disabled]="!selected" matRipple class="btn btn-icon btn-bg-light flex-center btn-color-danger btn-active-color-danger h-40px" tooltip="Anular Transacción" placement="start">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24" fill="none">
+            <path fill="currentColor" opacity=".3" d="M207.42,334.76c1.68,27.79,8.04,54.3,18.34,78.76h-95.31l37.5,34.12c11.85,11.21,12.36,29.91,1.14,41.75-.19,.2-.37,.39-.56,.58l-13.3,13.38c-11.53,11.53-30.23,11.53-41.77,0L11.54,401.99c-15.38-15.38-15.38-40.31,0-55.69h0l101.92-101.37c11.53-11.53,30.23-11.53,41.77,0l13.38,13.38c11.53,11.53,11.54,30.23,0,41.77-.19,.19-.38,.38-.58,.56l-37.57,34.12h76.97Zm432.58-14.76c0,106.06-85.94,192-192,192s-192-85.94-192-192,85.94-192,192-192,192,85.94,192,192Z"/>
+            <path fill="currentColor" d="M253.75,177.24H29.53C13.22,177.24,0,164.02,0,147.71v-19.69C0,111.71,13.22,98.48,29.53,98.48H352.75c-39.63,17.06-73.75,44.44-99.01,78.76Zm371.56-20.64c8.11-14.93,5.86-34-6.77-46.63L516.62,8.65c-11.53-11.53-30.23-11.53-41.77,0l-13.34,13.38c-.19,.19-.38,.38-.56,.58-11.21,11.85-10.7,30.54,1.14,41.75l18.41,16.74c57,7.67,107.68,35.24,144.81,75.51Zm-133.95,163.4l50.86-50.32,.02-.02c3.62-3.63,3.61-9.52-.02-13.14l-30.66-30.66-.02-.02c-3.63-3.62-9.52-3.61-13.14,.02l-50.4,50.79-50.32-50.86-.02-.02c-3.63-3.62-9.52-3.61-13.14,.02l-30.66,30.66-.02,.02c-3.62,3.63-3.61,9.52,.02,13.14l50.79,50.4-50.79,50.32-.02,.02c-3.62,3.63-3.61,9.52,.02,13.14l30.58,30.66,.02,.02c3.63,3.62,9.52,3.61,13.14-.02l50.4-50.79,50.32,50.79,.02,.02c3.63,3.62,9.52,3.61,13.14-.02l30.66-30.58,.02-.02c3.62-3.63,3.61-9.52-.02-13.14l-50.79-50.4Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!--end::Toolbar wrapper-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-fluid" id="kt_content_container">
+
+    <div class="row row-cols-1 mb-4">
+      <div>
+        <div class="card card-table">
+
+          <div class="card-header border-0 pt-5">
+            <h3 class="card-title align-items-start flex-column">
+              <span class="card-label fw-bolder fs-3 mb-1">Listado de transacciones</span>
+              <span class="text-muted mt-1 fw-bold fs-7">Se encontraron {{ tabla?.dataSource?.data?.length }} registros</span>
+            </h3>
+            <div class="card-toolbar d-flex flex-shrink-0">
+                <div class="d-none d-lg-block" placement="top" tooltip="Actualizar la lista">
+                  <button  class="btn btn-sm btn-light-success btn-icon-success btn-icon btn-icon-light-success btn-active-color-success btn-active-light-success pulse pulse-success" (click)="onReload()">
+                      <span class="svg-icon svg-icon-3 me-0" [class.spinner]="tabla._loading.asObservable() | async">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                          <path fill="currentColor" opacity=".3" d="M478.71 364.58zm-22 6.11l-27.83-15.9a15.92 15.92 0 0 1-6.94-19.2A184 184 0 1 1 256 72c5.89 0 11.71.29 17.46.83-.74-.07-1.48-.15-2.23-.21-8.49-.69-15.23-7.31-15.23-15.83v-32a16 16 0 0 1 15.34-16C266.24 8.46 261.18 8 256 8 119 8 8 119 8 256s111 248 248 248c98 0 182.42-56.95 222.71-139.42-4.13 7.86-14.23 10.55-22 6.11z" />
+                          <path fill="currentColor" d="M271.23 72.62c-8.49-.69-15.23-7.31-15.23-15.83V24.73c0-9.11 7.67-16.78 16.77-16.17C401.92 17.18 504 124.67 504 256a246 246 0 0 1-25 108.24c-4 8.17-14.37 11-22.26 6.45l-27.84-15.9c-7.41-4.23-9.83-13.35-6.2-21.07A182.53 182.53 0 0 0 440 256c0-96.49-74.27-175.63-168.77-183.38z" />
+                        </svg>
+                      </span>
+                    <span class="pulse-ring"></span>
+                  </button>
+                </div>
+                <div class="d-flex d-lg-none align-items-center ms-3 position-relative" dropdown>
+                  <button matRipple type="button" class="btn btn-sm btn-icon btn-color-primary btn-bg-light-primary btn-active-light-primary d-block" dropdownToggle>
+                    <span class="svg-icon svg-icon-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                          <rect x="5" y="5" width="5" height="5" rx="1" fill="currentColor"></rect>
+                          <rect x="14" y="5" width="5" height="5" rx="1" fill="currentColor" opacity="0.3"></rect>
+                          <rect x="5" y="14" width="5" height="5" rx="1" fill="currentColor" opacity="0.3"></rect>
+                          <rect x="14" y="14" width="5" height="5" rx="1" fill="currentColor" opacity="0.3"></rect>
+                        </g>
+                      </svg>
+                    </span>
+                  </button>
+                  <!--begin::Menu-->
+                  <div *dropdownMenu aria-labelledby="button-alignment" class="dropdown-menu dropdown-menu-end menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-muted menu-active-bg menu-state-primary fw-bold fs-6 w-200px">
+                    <div class="menu-item px-3">
+                      <div class="menu-content fs-6 text-dark fw-bolder px-3 py-4">Acciones</div>
+                    </div>
+                    <div class="separator opacity-75"></div>
+                    <div class="py-3">
+                      <div class="menu-item px-3">
+                        <button matRipple class="btn btn-active-light-primary btn-sm text-start w-100 px-3" (click)="onCreate()">
+                          <span class="svg-icon svg-icon-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor"></rect>
+                              <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor"></rect>
+                            </svg>
+                          </span>
+                          Nuevo Registro
+                        </button>
+                      </div>
+                      <div class="menu-item px-3">
+                        <button [disabled]="!selected" matRipple class="btn btn btn-active-light-primary btn-sm text-start w-100 px-3" (click)="onShow()">
+                          <span class="svg-icon svg-icon-3 ng-tns-c165-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 576 512">
+                              <path fill="currentColor" opacity=".3" d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288.14 400H288a143.93 143.93 0 1 1 .14 0z"/>
+                              <path fill="currentColor" d="M380.66 280.87a95.78 95.78 0 1 1-184.87-50.18 47.85 47.85 0 0 0 66.9-66.9 95.3 95.3 0 0 1 118 117.08z"/>
+                            </svg>
+                          </span>
+                          Ver Transacción
+                        </button>
+                      </div>
+                      <div class="menu-item px-3">
+                        <button [disabled]="!selected" matRipple class="btn btn btn-active-light-primary btn-sm text-start w-100 px-3" (click)="onConfirm()">
+                          <span class="svg-icon svg-icon-3 ng-tns-c165-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24" fill="none">
+                              <path fill="currentColor" opacity=".3" d="M448 128c-106 0-192 86-192 192s86 192 192 192 192-86 192-192-86-192-192-192zm114.1 147.8l-131 130a11 11 0 0 1-15.6-.1l-75.7-76.3a11 11 0 0 1 .1-15.6l26-25.8a11 11 0 0 1 15.6.1l42.1 42.5 97.2-96.4a11 11 0 0 1 15.6.1l25.8 26a11 11 0 0 1-.1 15.5z" />
+                              <path fill="currentColor" d="M240 0H98.6a47.87 47.87 0 0 0-45.5 32.8L2.5 184.6c-.8 2.4-.8 4.9-1.2 7.4H240zm208 80a221.93 221.93 0 0 1 27.2 1.7l-16.3-48.8A47.83 47.83 0 0 0 413.4 0H272v157.4C315.9 109.9 378.4 80 448 80zM208 320a238.53 238.53 0 0 1 20.2-96H0v240a48 48 0 0 0 48 48h256.6C246.1 468.2 208 398.6 208 320zm354.2-59.7l-25.8-26a11 11 0 0 0-15.6-.1l-97.2 96.4-42.1-42.5a11 11 0 0 0-15.6-.1l-26 25.8a11 11 0 0 0-.1 15.6l75.7 76.3a11 11 0 0 0 15.6.1l131-130a11 11 0 0 0 .1-15.5z" />
+                            </svg>
+                          </span>
+                          Confirmar Transacción
+                        </button>
+                      </div>
+
+                      <div class="menu-item px-3">
+                        <button [disabled]="!selected" matRipple class="btn btn btn-active-light-primary btn-sm text-start w-100 px-3" (click)="onConfirm()">
+                          <span class="svg-icon svg-icon-3 ng-tns-c165-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="24" height="24">
+                              <path fill="currentColor" opacity=".3" d="M448,128c-106.06,0-192,85.94-192,192s85.94,192,192,192,192-85.94,192-192-85.94-192-192-192Zm94.14,242.4c3.63,3.62,3.64,9.5,.02,13.14l-.02,.02-30.66,30.58c-3.62,3.63-9.5,3.64-13.14,.02l-.02-.02-50.32-50.79-50.4,50.79c-3.62,3.63-9.5,3.64-13.14,.02l-.02-.02-30.58-30.66c-3.63-3.62-3.64-9.5-.02-13.14l.02-.02,50.79-50.32-50.79-50.4c-3.63-3.62-3.64-9.5-.02-13.14l.02-.02,30.66-30.66c3.62-3.63,9.5-3.64,13.14-.02l.02,.02,50.32,50.86,50.4-50.79c3.62-3.63,9.5-3.64,13.14-.02l.02,.02,30.66,30.66c3.63,3.62,3.64,9.5,.02,13.14l-.02,.02-50.86,50.32,50.79,50.4Z"/>
+                              <path fill="currentColor" d="M240,0H98.6c-20.65-.03-39,13.2-45.5,32.8L2.5,184.6c-.8,2.4-.8,4.9-1.2,7.4H240V0Zm208,80c9.09,0,18.18,.58,27.2,1.7l-16.3-48.8C452.44,13.25,434.09-.03,413.4,0h-141.4V157.4c43.9-47.5,106.4-77.4,176-77.4Zm-240,240c0-33.05,6.89-65.75,20.2-96H0v240c0,26.51,21.49,48,48,48H304.6c-58.5-43.8-96.6-113.4-96.6-192Zm334.14,50.4c3.63,3.62,3.64,9.5,.02,13.14l-.02,.02-30.66,30.58c-3.62,3.63-9.5,3.64-13.14,.02l-.02-.02-50.32-50.79-50.4,50.79c-3.62,3.63-9.5,3.64-13.14,.02l-.02-.02-30.58-30.66c-3.63-3.62-3.64-9.5-.02-13.14l.02-.02,50.79-50.32-50.79-50.4c-3.63-3.62-3.64-9.5-.02-13.14l.02-.02,30.66-30.66c3.62-3.63,9.5-3.64,13.14-.02l.02,.02,50.32,50.86,50.4-50.79c3.62-3.63,9.5-3.64,13.14-.02l.02,.02,30.66,30.66c3.63,3.62,3.64,9.5,.02,13.14l-.02,.02-50.86,50.32,50.79,50.4Z"/>
+                            </svg>
+                          </span>
+                          Cancelar Transacción
+                        </button>
+                      </div>
+                    </div>
+                    <div class="separator opacity-75"></div>
+                    <div class="menu-item px-3">
+                      <div class="menu-content px-3 py-3">
+                        <button matRipple class="mat-ripple btn btn-sm btn-light-primary btn-flex flex-center btn-active-primary w-100" (click)="onReload()">
+                            <span class="svg-icon svg-icon-3 ">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path fill="currentColor" opacity=".3" d="M478.71 364.58zm-22 6.11l-27.83-15.9a15.92 15.92 0 0 1-6.94-19.2A184 184 0 1 1 256 72c5.89 0 11.71.29 17.46.83-.74-.07-1.48-.15-2.23-.21-8.49-.69-15.23-7.31-15.23-15.83v-32a16 16 0 0 1 15.34-16C266.24 8.46 261.18 8 256 8 119 8 8 119 8 256s111 248 248 248c98 0 182.42-56.95 222.71-139.42-4.13 7.86-14.23 10.55-22 6.11z" />
+                                <path fill="currentColor" d="M271.23 72.62c-8.49-.69-15.23-7.31-15.23-15.83V24.73c0-9.11 7.67-16.78 16.77-16.17C401.92 17.18 504 124.67 504 256a246 246 0 0 1-25 108.24c-4 8.17-14.37 11-22.26 6.45l-27.84-15.9c-7.41-4.23-9.83-13.35-6.2-21.07A182.53 182.53 0 0 0 440 256c0-96.49-74.27-175.63-168.77-183.38z" />
+                              </svg>
+                            </span>
+                          Actualizar la tabla
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!--end::Menu-->
+                </div>
+            </div>
+          </div>
+
+          <div class="card-body pb-0">
+            <div class="mb-4">
+              <div class="d-flex align-items-center position-relative my-1">
+                <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                <span class="svg-icon svg-icon-1 position-absolute ms-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
+                  </svg>
+                </span>
+                <!--end::Svg Icon-->
+                <input type="text" data-kt-filter="search" class="form-control form-control-solid w-250px ps-14" (keyup)="filter($event)" placeholder="Buscar tipo de transacción" >
+
+
+              </div>
+            </div>
+            <tbl-transaccion #tabla (onConfirm)="onConfirm($event)" (onShow)="onShow($event)" (onCancel)="onCancel($event)" ></tbl-transaccion>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->

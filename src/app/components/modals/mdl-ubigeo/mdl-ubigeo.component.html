@@ -1,0 +1,73 @@
+<div class="modal-header">
+  <!--begin::Modal title-->
+  <h2>Ubigeo</h2>
+  <!--end::Modal title-->
+  <!--begin::Close-->
+  <div class="btn btn-sm btn-icon btn-active-color-primary" (click)="bsModalRef.hide()">
+    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+    <span class="svg-icon svg-icon-1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+      </svg>
+    </span>
+    <!--end::Svg Icon-->
+  </div>
+  <!--end::Close-->
+</div>
+<!--end::Modal header-->
+<!--begin::Modal body-->
+<div class="modal-body mx-5 mx-xl-15 my-7">
+  <!--begin::Form-->
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+    <div class="form-floating mb-7">
+      <select #idDepartamento class="form-select form-select-solid" id="idDepartamento" formControlName="idDepartamento" required
+              [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.idDepartamento.errors?.required}"
+              (change)="loadCities(idDepartamento.value)">
+        <option value="">-- Seleccionar departamento --</option>
+        <option *ngFor="let dpt of collectionDpt" [value]="dpt.id">{{ dpt.nombre }}</option>
+      </select>
+      <label for="idDepartamento">Departamento</label>
+      <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.idDepartamento.errors?.required">Seleccionar una departamento</div>
+    </div>
+
+    <div class="form-floating mb-7">
+      <select #idCiudad class="form-select form-select-solid" id="idCiudad" formControlName="idCiudad" required
+              [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.idCiudad.errors?.required}"
+              (change)="loadDistrits(idDepartamento.value, idCiudad.value)">
+        <option value="">-- Seleccionar ciudad --</option>
+        <option *ngFor="let cit of collectionCit" [value]="cit.id">{{ cit.nombre }}</option>
+      </select>
+      <label for="idCiudad">Ciudad</label>
+      <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.idCiudad.errors?.required">Seleccionar una ciudad</div>
+    </div>
+
+    <div class="form-floating mb-7">
+      <select class="form-select form-select-solid" id="idDistrito" formControlName="idDistrito" required [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.idDistrito.errors?.required}">
+        <option value="">-- Seleccionar distrito --</option>
+        <option *ngFor="let dst of collectionDst" [value]="dst.id">{{ dst.nombre }}</option>
+      </select>
+      <label for="idDistrito">Distrito</label>
+      <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.idDistrito.errors?.required">Seleccionar un distrito</div>
+    </div>
+
+    <div class="form-floating">
+      <textarea #direccion class="form-control form-control-solid " formControlName="direccion" [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.direccion.errors?.required}" placeholder="Ingresar dirección" id="direccion"></textarea>
+      <label for="direccion">Dirección</label>
+      <span class="text-end small text-muted"> {{direccion.value.length}} / 150</span>
+      <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.direccion.errors?.required">Ingresar dirección</div>
+    </div>
+
+    <div class="text-center pt-15">
+      <button matRipple type="reset" class="btn btn-light me-3" (click)="bsModalRef.hide()">Cancelar</button>
+      <button [disabled]="loadingSubmit" matRipple type="submit" class="btn btn-primary" [attr.data-kt-indicator]="submitted && loadingSubmit">
+        <span class="indicator-label">Guardar</span>
+        <span class="indicator-progress">Porfavor espere...
+          <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+      </button>
+    </div>
+
+  </form>
+  <!--end::Form-->
+</div>

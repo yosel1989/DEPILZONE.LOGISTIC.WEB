@@ -1,0 +1,100 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="h-100">
+<div class="modal-header sticky-top bg-white shadow-sm">
+  <h2> Confirmar {{ transaccion.tipoTransaccion }} N° {{ transaccion.id }} </h2>
+  <div class="btn btn-sm btn-icon btn-active-color-primary" (click)="bsModalRef.hide()">
+    <span class="svg-icon svg-icon-1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+      </svg>
+    </span>
+  </div>
+</div>
+<!--end::Modal header-->
+<!--begin::Modal body-->
+<div class="modal-body p-0 overflow-auto ">
+  <!--begin::Form-->
+
+    <div class="p-10 border-bottom">
+      <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3 row-cols-xl-4">
+        <div class="col">
+          Sede Destino
+        </div>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" class="w-100 nowrap muted">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef >ID</th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="articulo">
+          <th mat-header-cell *matHeaderCellDef> Articulo </th>
+          <td mat-cell *matCellDef="let element"> {{element.articulo}} </td>
+        </ng-container>
+
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="cantidad">
+          <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+          <td mat-cell *matCellDef="let element"> {{ element.cantidad }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cantidadReal">
+          <th mat-header-cell *matHeaderCellDef> Cantidad Real </th>
+          <td mat-cell *matCellDef="let element">
+            <input #cantidadReal type="number" class="form-control form-control-sm form-control-solid w-100px " min="0" [max]="element.cantidad" step="1" [value]="element.cantidadReal" [ngClass]="{ 'form-select-danger is-invalid' : cantidadReal.value > element.cantidad || cantidadReal.value === '' || (submitted && cantidadReal.value === '0') }" (change)="onChangeCantidadReal(element.id, cantidadReal.value)"/>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef class="w-50px"></th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex justify-content-end flex-shrink-0">
+              <a class="btn btn-icon btn-light-danger btn-sm" tooltip="Quitar" placement="start" (click)="onRemove(element.id)">
+                <span class="svg-icon svg-icon-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+    <div *ngIf="isTransaccion(TipoTransaccion.TransaccionSalida)" class="text-center">
+      <button type="button" matRipple class="btn btn btn-light-success btn-lg my-5" (click)="onSearchArticle()">
+              <span class="svg-icon svg-icon-2x">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+                  <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
+                </svg>
+              </span>
+        Añadir artículos
+      </button>
+    </div>
+
+  <!--end::Form-->
+</div>
+
+<div class="modal-footer position-sticky bottom-0 bg-white shadow-sm">
+  <button matRipple type="reset" class="btn btn-light" (click)="bsModalRef.hide()">Cancelar</button>
+  <button matRipple [disabled]="loadingSubmit" matRipple type="submit" class="btn btn-primary" [attr.data-kt-indicator]="submitted && loadingSubmit">
+    <span class="indicator-label">Guardar</span>
+    <span class="indicator-progress">Porfavor espere...
+          <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+  </button>
+</div>
+</form>

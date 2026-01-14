@@ -1,0 +1,104 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate" class="mx-n9 position-absolute"></mat-progress-bar>
+
+<div class="table-responsive end-0" >
+
+  <table #tabla mat-table [dataSource]="dataSource" matSort class="w-100 nowrap muted">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef width="50">
+        <div class="form-check form-check-sm form-check-custom form-check-solid">
+          <input class="form-check-input" type="checkbox"
+                 (change)="$event ? masterToggle() : null"
+                 [checked]="selection.hasValue() && isAllSelected()"
+                 [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </div>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <div class="form-check form-check-sm form-check-custom form-check-solid">
+          <input class="form-check-input" type="checkbox"
+                 (click)="$event.stopPropagation()"
+                 (change)="$event ? selection.toggle(row) : null"
+                 [checked]="selection.isSelected(row)">
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header width="50"> N° </th>
+      <td mat-cell *matCellDef="let element"> {{element.id.toString().padStart(6,'0')}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="items">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> N° Items </th>
+      <td mat-cell *matCellDef="let element"> {{ element.items }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaRegistro">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> F. Registro </th>
+      <td mat-cell *matCellDef="let element">
+        <span class="d-block small">{{element.fechaRegistro | date: 'dd-MM-yyyy hh:mm:ss aa'}}</span>
+        <span class="d-block small">{{ element.usuarioRegistro }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaModifico">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> F. Modifico </th>
+      <td mat-cell *matCellDef="let element">
+        <span class="d-block small">{{element.fechaModifico | date: 'dd-MM-yyyy hh:mm:ss aa'}}</span>
+        <span class="d-block small">{{ element.usuarioModifico }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef="let element">
+        <span class="badge py-3 px-4 fs-8 f-w-500" [ngClass]="{'badge-light-warning': element.idEstado === EstadoOrdenCompra.Pendiente, 'badge-light-success': element.idEstado === EstadoOrdenCompra.Confirmado, 'badge-light-danger' : element.idEstado === EstadoOrdenCompra.Anulado }">{{ element.estado }}</span>
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef width="50"> Acciones </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="d-flex justify-content-end flex-shrink-0">
+          <button matRipple class="btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1" (click)="show(element)" tooltip="Ver">
+            <span class="svg-icon svg-icon-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 576 512">
+                <path fill="currentColor" opacity=".3" d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288.14 400H288a143.93 143.93 0 1 1 .14 0z"/>
+                <path fill="currentColor" d="M380.66 280.87a95.78 95.78 0 1 1-184.87-50.18 47.85 47.85 0 0 0 66.9-66.9 95.3 95.3 0 0 1 118 117.08z"/>
+              </svg>
+            </span>
+          </button>
+          <button matRipple [disabled]="[EstadoOrdenCompra.Confirmado, EstadoOrdenCompra.Anulado].includes(element.idEstado)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" (click)="confirm(element)" tooltip="Confirmar">
+            <span class="svg-icon svg-icon-3">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512.01" width="24" height="24" fill="none">
+                <path fill="currentColor" opacity=".3" d="M207.69,301.05l-48.48-237.05h392.79c1.79,0,3.57,.2,5.31,.6,12.92,2.94,21.02,15.8,18.08,28.72l-4.38,19.28c-36-21.39-78.04-33.68-122.97-33.68-126.8,0-230.68,97.82-240.35,222.13Zm240.31-173.05c-106.06,0-192,85.94-192,192s85.94,192,192,192,192-85.94,192-192-85.94-192-192-192Z"/>
+                <path fill="currentColor" d="M207.69,301.06L150,19.19C147.72,8.04,137.91,.02,126.53,0H24C10.75,0,0,10.75,0,24v16c0,13.25,10.75,24,24,24H93.88l70.25,343.43c-4.46,2.56-8.54,5.72-12.14,9.39-21.64,22.09-21.27,57.55,.82,79.19,22.09,21.64,57.55,21.27,79.19-.82,11.04-11.27,16.34-26.01,15.96-40.63-25.89-38.43-41.01-84.73-41.01-134.57,0-6.38,.25-12.69,.74-18.94Zm218.1,120.6c-4.84,4.83-12.68,4.83-17.51,0l-80.52-80.52c-4.83-4.84-4.83-12.68,0-17.51l17.51-17.52c4.84-4.84,12.68-4.84,17.52,0h0l54.24,54.24,116.18-116.18c4.84-4.84,12.68-4.84,17.52,0h0l17.51,17.52c4.83,4.84,4.83,12.68,0,17.51l-142.45,142.45Z"/>
+              </svg>
+            </span>
+          </button>
+          <button matRipple [disabled]="[EstadoOrdenCompra.Anulado].includes(element.idEstado)" class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm" (click)="cancel(element)" tooltip="Cancelar">
+            <span class="svg-icon svg-icon-3">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512.01" width="24" height="24" fill="none">
+                <path fill="currentColor" opacity=".3" d="M448,128c-106.06,0-192,85.94-192,192s85.94,192,192,192,192-85.94,192-192-85.94-192-192-192Zm-240.31,173.05l-48.48-237.05h392.79c1.79,0,3.57,.2,5.31,.6,12.92,2.94,21.02,15.8,18.08,28.72l-4.38,19.28c-36-21.39-78.04-33.68-122.97-33.68-126.8,0-230.68,97.82-240.35,222.13Z"/>
+                <path fill="currentColor" d="M542.14,370.4c3.63,3.62,3.64,9.5,.02,13.14l-.02,.02-30.66,30.58c-3.62,3.63-9.5,3.64-13.14,.02l-.02-.02-50.32-50.79-50.4,50.79c-3.62,3.63-9.5,3.64-13.14,.02l-.02-.02-30.58-30.66c-3.63-3.62-3.64-9.5-.02-13.14l.02-.02,50.79-50.32-50.79-50.4c-3.63-3.62-3.64-9.5-.02-13.14l.02-.02,30.66-30.66c3.62-3.63,9.5-3.64,13.14-.02l.02,.02,50.32,50.86,50.4-50.79c3.62-3.63,9.5-3.64,13.14-.02l.02,.02,30.66,30.66c3.63,3.62,3.64,9.5,.02,13.14l-.02,.02-50.86,50.32,50.79,50.4Zm-334.45-69.34L150,19.19C147.72,8.04,137.91,.02,126.53,0H24C10.75,0,0,10.75,0,24v16c0,13.25,10.75,24,24,24H93.88l70.25,343.43c-4.46,2.56-8.54,5.72-12.14,9.39-21.64,22.09-21.27,57.55,.82,79.19,22.09,21.64,57.55,21.27,79.19-.82,11.04-11.27,16.34-26.01,15.96-40.63-25.89-38.43-41.01-84.73-41.01-134.57,0-6.38,.25-12.69,.74-18.94Z"/>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; let i = index; columns: displayedColumns;" [@slideFromBottom]="{value: '* <=> *',params : { delay: (i+1) * 50 }}" [class.bg-lighten]="selection.isSelected(row)" ></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell text-muted small" [attr.colspan]="displayedColumns.length">No se encontraron registros</td>
+    </tr>
+  </table>
+
+</div>
+
+<mat-paginator class="bg-light" [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>

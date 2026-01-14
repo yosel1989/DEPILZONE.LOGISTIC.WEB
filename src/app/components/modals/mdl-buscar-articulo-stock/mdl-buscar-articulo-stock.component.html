@@ -1,0 +1,138 @@
+
+<div class="modal-header">
+  <h2>Buscar Stock Artículo</h2>
+  <div class="btn btn-sm btn-icon btn-active-color-primary" (click)="bsModalRef.hide()">
+    <span class="svg-icon svg-icon-1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+      </svg>
+    </span>
+  </div>
+</div>
+<div class="modal-body p-0">
+
+  <div class="border-bottom sticky-top bg-white z-index-3">
+    <form [formGroup]="formGroup" (ngSubmit)="onSearch()">
+      <div class="d-flex p-10 ">
+        <div class="d-lg-block w-100 mb-5 mb-lg-0 position-relative">
+          <input type="text" class="fs-4 search-input form-control form-control-solid" formControlName="searchControl"  placeholder="Ingresar el código o nombre del artículo" [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.searchControl.errors}">
+          <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && (f.searchControl.hasError('required') || f.searchControl.hasError('whiteSpace')) ">Ingresar el código o nombre del artículo</div>
+        </div>
+        <div class="flex-shrink-0 ms-2">
+          <button matRipple type="submit" class="fs-4 btn btn-icon btn-icon-success btn-bg-light btn-active-icon-success btn-active-light-success">
+            <span class="svg-icon svg-icon-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <mat-progress-bar *ngIf="loadingArticuloStocks"  mode="indeterminate" ></mat-progress-bar>
+  </div>
+  <div class="result">
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" matSort class="w-100 nowrap muted">
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef width="50">
+            <div class="form-check form-check-sm form-check-success form-check-solid">
+              <input class="form-check-input" type="checkbox"
+                     (change)="$event ? masterToggle() : null"
+                     [checked]="selection.hasValue() && isAllSelected()"
+                     [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </div>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <div class="form-check form-check-sm form-check-success form-check-solid">
+              <input class="form-check-input" type="checkbox"
+                     (click)="$event.stopPropagation()"
+                     (change)="$event ? selection.toggle(row) : null"
+                     [checked]="selection.isSelected(row)">
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="id" >
+          <th mat-header-cell *matHeaderCellDef >ID</th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="articulo">
+          <th mat-header-cell *matHeaderCellDef> Articulo </th>
+          <td mat-cell *matCellDef="let element"> {{element.articulo}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="almacen">
+          <th mat-header-cell *matHeaderCellDef> Almacen </th>
+          <td mat-cell *matCellDef="let element"> {{element.almacen}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="ubicacion">
+          <th mat-header-cell *matHeaderCellDef> Ubicación </th>
+          <td mat-cell *matCellDef="let element"> {{element.ubicacion}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="sede">
+          <th mat-header-cell *matHeaderCellDef> Sede </th>
+          <td mat-cell *matCellDef="let element"> {{element.sede}} </td>
+        </ng-container>
+
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="stock">
+          <th mat-header-cell *matHeaderCellDef> Stock Disp. </th>
+          <td mat-cell *matCellDef="let element"> {{element.stock}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let element">
+            <span *ngIf="element.idEstado === 0" class="badge py-3 px-4 fs-8 badge-light-danger f-w-500">{{ element.estado }}</span>
+            <span *ngIf="element.idEstado === 1" class="badge py-3 px-4 fs-8 badge-light-primary f-w-500">{{ element.estado }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef class="w-50px"></th>
+          <td mat-cell *matCellDef="let element">
+            <div class="d-flex justify-content-end flex-shrink-0">
+              <a class="btn btn-icon btn-light-danger btn-sm" tooltip="Quitar" placement="start">
+                <span class="svg-icon svg-icon-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+        <tr class="cursor-pointer" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell text-muted small" [attr.colspan]="displayedColumns.length">No se encontraron registros</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <button matRipple type="reset" class="btn btn-light" (click)="bsModalRef.hide()">Cancelar</button>
+  <button matRipple type="reset" class="btn btn-success" (click)="onPush()">Añadir</button>
+</div>

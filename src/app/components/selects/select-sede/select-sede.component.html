@@ -1,0 +1,18 @@
+<div *ngIf="!_loading.value" class="input-group input-group input-group-solid mb-5">
+  <span class="input-group-text">
+    <!--begin::Svg Icon | path: icons/duotune/communication/com006.svg-->
+    <span class="svg-icon svg-icon-1">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24px" height="24px" fill="none">
+        <path fill="currentColor" opacity=".3" d="M180 160h-40a12 12 0 0 0-12 12v40a12 12 0 0 0 12 12h40a12 12 0 0 0 12-12v-40a12 12 0 0 0-12-12zm0 96h-40a12 12 0 0 0-12 12v40a12 12 0 0 0 12 12h40a12 12 0 0 0 12-12v-40a12 12 0 0 0-12-12zm0-192h-40a12 12 0 0 0-12 12v40a12 12 0 0 0 12 12h40a12 12 0 0 0 12-12V76a12 12 0 0 0-12-12zm128 0h-40a12 12 0 0 0-12 12v40a12 12 0 0 0 12 12h40a12 12 0 0 0 12-12V76a12 12 0 0 0-12-12zm0 96h-40a12 12 0 0 0-12 12v40a12 12 0 0 0 12 12h40a12 12 0 0 0 12-12v-40a12 12 0 0 0-12-12zm0 96h-40a12 12 0 0 0-12 12v40a12 12 0 0 0 12 12h40a12 12 0 0 0 12-12v-40a12 12 0 0 0-12-12z" />
+        <path fill="currentColor" d="M436 480h-20V24a24 24 0 0 0-24-24H56a24 24 0 0 0-24 24v456H12a12 12 0 0 0-12 12v20h448v-20a12 12 0 0 0-12-12zM128 76a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12v40a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12zm0 96a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12v40a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12zm52 148h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12v40a12 12 0 0 1-12 12zm76 160h-64v-84a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm64-172a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-96a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12v-40a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12zm0-96a12 12 0 0 1-12 12h-40a12 12 0 0 1-12-12V76a12 12 0 0 1 12-12h40a12 12 0 0 1 12 12z" />
+      </svg>
+    </span>
+    <!--end::Svg Icon-->
+  </span>
+  <select class="form-select form-select-solid" (change)="onChange($event)">
+    <option *ngIf="_collection.value.length > 1" [value]="0">Todas las sedes</option>
+    <option *ngFor="let sede of _collection.asObservable() | async" [value]="sede.id">{{ sede.nombre }}</option>
+  </select>
+</div>
+
+<ngx-skeleton-loader *ngIf="_loading.value" class="rounded" animation="progress" [theme]="{height: '42px'}"></ngx-skeleton-loader>

@@ -1,0 +1,137 @@
+<!--begin::Header-->
+<div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+  <!--begin::Container-->
+  <div class="container-fluid d-flex align-items-center justify-content-between" id="kt_header_container">
+    <!--begin::Page title-->
+    <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap mt-n5 mt-lg-0 me-lg-2 pb-2 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
+      <!--begin::Heading-->
+      <h1 class="text-dark fw-bolder my-0 fs-2">Orden de compra</h1>
+      <!--end::Heading-->
+      <!--begin::Breadcrumb-->
+      <ul class="breadcrumb fw-bold fs-base my-1">
+        <li class="breadcrumb-item text-muted">
+          <a  routerLink="/" class="text-muted">Inicio</a>
+        </li>
+        <li class="breadcrumb-item text-dark">Orden de compra</li>
+      </ul>
+      <!--end::Breadcrumb-->
+    </div>
+    <!--end::Page title=-->
+    <!--begin::Wrapper-->
+    <div class="d-flex d-lg-none align-items-center ms-n2 me-2">
+      <!--begin::Aside mobile toggle-->
+      <div class="btn btn-icon btn-active-icon-primary" id="kt_aside_toggle">
+        <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
+        <span class="svg-icon svg-icon-1">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+											<path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="currentColor" />
+											<path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="currentColor" />
+										</svg>
+									</span>
+        <!--end::Svg Icon-->
+      </div>
+      <!--end::Aside mobile toggle-->
+      <!--begin::Logo-->
+      <a href="index-2.html" class="d-flex align-items-center">
+        <img alt="Logo" src="assets/media/logos/logo-demo7.svg" class="h-30px" />
+      </a>
+      <!--end::Logo-->
+    </div>
+    <!--end::Wrapper-->
+    <!--begin::Toolbar wrapper-->
+    <div class="d-flex flex-shrink-0">
+      <div class="d-flex align-items-center me-3" tooltip="Nuevo O/C" placement="start">
+        <button matRipple class="btn btn-icon btn-bg-light flex-center btn-color-success btn-active-color-success h-40px" (click)="onCreate()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512.01" width="24" height="24" fill="none">
+            <path fill="currentColor" opacity=".3" d="M207.69,301.05l-48.48-237.05h392.79c1.79,0,3.57,.2,5.31,.6,12.92,2.94,21.02,15.8,18.08,28.72l-4.38,19.28c-36-21.39-78.04-33.68-122.97-33.68-126.8,0-230.68,97.82-240.35,222.13Zm240.31-173.05c-106.06,0-192,85.94-192,192s85.94,192,192,192,192-85.94,192-192-85.94-192-192-192Z"/>
+            <path fill="currentColor" d="M207.69,301.06L150,19.19C147.72,8.04,137.91,.02,126.53,0H24C10.75,0,0,10.75,0,24v16c0,13.25,10.75,24,24,24H93.88l70.25,343.43c-4.46,2.56-8.54,5.72-12.14,9.39-21.64,22.09-21.27,57.55,.82,79.19,22.09,21.64,57.55,21.27,79.19-.82,11.04-11.27,16.34-26.01,15.96-40.63-25.89-38.43-41.01-84.73-41.01-134.57,0-6.38,.25-12.69,.74-18.94Zm351.79,40.62c0,5.13-4.16,9.29-9.29,9.29h-71.23v71.23c0,5.13-4.16,9.29-9.29,9.29h-43.35c-5.13,0-9.29-4.16-9.29-9.29v-71.23h-71.23c-5.13,0-9.29-4.16-9.29-9.29v-43.35c0-5.13,4.16-9.29,9.29-9.29h71.23v-71.23c0-5.13,4.16-9.29,9.29-9.29h43.35c5.13,0,9.29,4.16,9.29,9.29v71.23h71.23c5.13,0,9.29,4.16,9.29,9.29v43.35Z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="d-flex align-items-center me-3" tooltip="Ver O/C" placement="start">
+        <button [disabled]="!selected" matRipple class="btn btn-icon btn-bg-light flex-center btn-color-success btn-active-color-success h-40px" (click)="onShow()">
+          <svg xmlns="http://www.w3.org/2000/svg" widht="24" height="24" fill="none" viewBox="0 0 576 512">
+            <path fill="currentColor" opacity=".3" d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288.14 400H288a143.93 143.93 0 1 1 .14 0z"/>
+            <path fill="currentColor" d="M380.66 280.87a95.78 95.78 0 1 1-184.87-50.18 47.85 47.85 0 0 0 66.9-66.9 95.3 95.3 0 0 1 118 117.08z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="d-flex align-items-center me-3" tooltip="Confirmar O/C" placement="start">
+        <button [disabled]="!selected" matRipple class="btn btn-icon flex-center btn-bg-light btn-color-primary btn-active-color-primary h-40px" (click)="onConfirm()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512.01" width="24" height="24" fill="none">
+            <path fill="currentColor" opacity=".3" d="M207.69,301.05l-48.48-237.05h392.79c1.79,0,3.57,.2,5.31,.6,12.92,2.94,21.02,15.8,18.08,28.72l-4.38,19.28c-36-21.39-78.04-33.68-122.97-33.68-126.8,0-230.68,97.82-240.35,222.13Zm240.31-173.05c-106.06,0-192,85.94-192,192s85.94,192,192,192,192-85.94,192-192-85.94-192-192-192Z"/>
+            <path fill="currentColor" d="M207.69,301.06L150,19.19C147.72,8.04,137.91,.02,126.53,0H24C10.75,0,0,10.75,0,24v16c0,13.25,10.75,24,24,24H93.88l70.25,343.43c-4.46,2.56-8.54,5.72-12.14,9.39-21.64,22.09-21.27,57.55,.82,79.19,22.09,21.64,57.55,21.27,79.19-.82,11.04-11.27,16.34-26.01,15.96-40.63-25.89-38.43-41.01-84.73-41.01-134.57,0-6.38,.25-12.69,.74-18.94Zm218.1,120.6c-4.84,4.83-12.68,4.83-17.51,0l-80.52-80.52c-4.83-4.84-4.83-12.68,0-17.51l17.51-17.52c4.84-4.84,12.68-4.84,17.52,0h0l54.24,54.24,116.18-116.18c4.84-4.84,12.68-4.84,17.52,0h0l17.51,17.52c4.83,4.84,4.83,12.68,0,17.51l-142.45,142.45Z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="d-flex align-items-center" tooltip="Cancelar O/C" placement="start" >
+        <button [disabled]="!selected" matRipple class="btn btn-icon flex-center btn-bg-light btn-color-danger btn-active-color-danger h-40px" (click)="onCancel">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512.01" width="24" height="24" fill="none">
+            <path fill="currentColor" opacity=".3" d="M448,128c-106.06,0-192,85.94-192,192s85.94,192,192,192,192-85.94,192-192-85.94-192-192-192Zm-240.31,173.05l-48.48-237.05h392.79c1.79,0,3.57,.2,5.31,.6,12.92,2.94,21.02,15.8,18.08,28.72l-4.38,19.28c-36-21.39-78.04-33.68-122.97-33.68-126.8,0-230.68,97.82-240.35,222.13Z"/>
+            <path fill="currentColor" d="M542.14,370.4c3.63,3.62,3.64,9.5,.02,13.14l-.02,.02-30.66,30.58c-3.62,3.63-9.5,3.64-13.14,.02l-.02-.02-50.32-50.79-50.4,50.79c-3.62,3.63-9.5,3.64-13.14,.02l-.02-.02-30.58-30.66c-3.63-3.62-3.64-9.5-.02-13.14l.02-.02,50.79-50.32-50.79-50.4c-3.63-3.62-3.64-9.5-.02-13.14l.02-.02,30.66-30.66c3.62-3.63,9.5-3.64,13.14-.02l.02,.02,50.32,50.86,50.4-50.79c3.62-3.63,9.5-3.64,13.14-.02l.02,.02,30.66,30.66c3.63,3.62,3.64,9.5,.02,13.14l-.02,.02-50.86,50.32,50.79,50.4Zm-334.45-69.34L150,19.19C147.72,8.04,137.91,.02,126.53,0H24C10.75,0,0,10.75,0,24v16c0,13.25,10.75,24,24,24H93.88l70.25,343.43c-4.46,2.56-8.54,5.72-12.14,9.39-21.64,22.09-21.27,57.55,.82,79.19,22.09,21.64,57.55,21.27,79.19-.82,11.04-11.27,16.34-26.01,15.96-40.63-25.89-38.43-41.01-84.73-41.01-134.57,0-6.38,.25-12.69,.74-18.94Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!--end::Toolbar wrapper-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-fluid" id="kt_content_container">
+
+    <div class="row row-cols-1 mb-4">
+      <div>
+        <div class="card card-table">
+
+          <div class="card-header border-0 pt-5">
+            <h3 class="card-title align-items-start flex-column">
+              <span class="card-label fw-bolder fs-3 mb-1">Listado de ordenes de compra</span>
+              <span class="text-muted mt-1 fw-bold fs-7">Se encontraron {{ tabla?.dataSource?.data?.length }} registros</span>
+            </h3>
+            <div class="card-toolbar d-flex">
+                <div class="d-block" tooltip="Actualizar la lista" placement="bottom">
+                  <button class="position-relative btn btn-sm btn-light-success btn-icon-success btn-icon btn-icon-light-success btn-active-color-success btn-active-light-success pulse pulse-success" (click)="onReload()">
+                      <span class="pulse-ring"></span>
+                      <span class="svg-icon svg-icon-3 me-0" [class.spinner]="tabla._loading.asObservable() | async">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                          <path fill="currentColor" opacity=".3" d="M478.71 364.58zm-22 6.11l-27.83-15.9a15.92 15.92 0 0 1-6.94-19.2A184 184 0 1 1 256 72c5.89 0 11.71.29 17.46.83-.74-.07-1.48-.15-2.23-.21-8.49-.69-15.23-7.31-15.23-15.83v-32a16 16 0 0 1 15.34-16C266.24 8.46 261.18 8 256 8 119 8 8 119 8 256s111 248 248 248c98 0 182.42-56.95 222.71-139.42-4.13 7.86-14.23 10.55-22 6.11z" />
+                          <path fill="currentColor" d="M271.23 72.62c-8.49-.69-15.23-7.31-15.23-15.83V24.73c0-9.11 7.67-16.78 16.77-16.17C401.92 17.18 504 124.67 504 256a246 246 0 0 1-25 108.24c-4 8.17-14.37 11-22.26 6.45l-27.84-15.9c-7.41-4.23-9.83-13.35-6.2-21.07A182.53 182.53 0 0 0 440 256c0-96.49-74.27-175.63-168.77-183.38z" />
+                        </svg>
+                      </span>
+                  </button>
+                </div>
+            </div>
+          </div>
+
+          <div class="card-body pb-0">
+            <div class="mb-4">
+              <div class="d-flex align-items-center position-relative my-1">
+                <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                <span class="svg-icon svg-icon-1 position-absolute ms-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor"></rect>
+                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor"></path>
+                  </svg>
+                </span>
+                <!--end::Svg Icon-->
+                <input type="text" data-kt-filter="search" class="form-control form-control-solid w-250px ps-14" (keyup)="filter($event)" placeholder="Buscar orden de compra" >
+
+
+              </div>
+            </div>
+            <tbl-orden-compra #tabla (onShow)="onShow()" (onConfirm)="onConfirm()" (onCancel)="onCancel()" ></tbl-orden-compra>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->

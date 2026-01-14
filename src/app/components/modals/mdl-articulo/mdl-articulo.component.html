@@ -1,0 +1,115 @@
+<div class="modal-header">
+  <!--begin::Modal title-->
+  <h2>{{ articulo ? 'Editar' : 'Nuevo' }} Artículo</h2>
+  <!--end::Modal title-->
+  <!--begin::Close-->
+  <div class="btn btn-sm btn-icon btn-active-color-primary" (click)="bsModalRef.hide()">
+    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+    <span class="svg-icon svg-icon-1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor"></rect>
+        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor"></rect>
+      </svg>
+    </span>
+    <!--end::Svg Icon-->
+  </div>
+  <!--end::Close-->
+</div>
+<!--end::Modal header-->
+<!--begin::Modal body-->
+<div class="modal-body mx-5 mx-xl-15 my-7">
+  <!--begin::Form-->
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <!--begin::8 group-->
+    <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+      <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+        <span class="required">Nombre</span>
+        <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Nombre del artículo"></i>
+      </label>
+      <input  maxlength="50" type="text" class="form-control form-control-solid" placeholder="" formControlName="nombre" [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.nombre.errors?.required}">
+      <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.nombre.errors?.required">Ingresar el nombre del artículo</div>
+    </div>
+
+    <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+      <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+        <span>Descripción</span>
+        <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Descripción breve"></i>
+      </label>
+      <textarea maxlength="150" type="text" class="form-control form-control-solid" placeholder="" formControlName="descripcion"></textarea>
+      <div class="fv-plugins-message-container invalid-feedback"></div>
+    </div>
+
+    <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+      <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+        <span>Código</span>
+        <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Código del artículo"></i>
+      </label>
+      <div class="d-flex align-items-center position-relative my-1">
+        <span class="svg-icon svg-icon-1 position-absolute ms-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 448 512" fill="none">
+            <path fill="currentColor" opacity="..3" d="M0 480h192V288H0zm64-128h64v64H64zM256 32v192h192V32zm128 128h-64V96h64zM0 224h192V32H0zM64 96h64v64H64z"/>
+            <path fill="currentColor" d="M416 480h32v-32h-32zm-64 0h32v-32h-32zm64-192v32h-64v-32h-96v192h64v-96h32v32h96V288z" />
+          </svg>
+        </span>
+        <input type="text" data-kt-filter="search" class="form-control form-control-solid ps-14" formControlName="codigo" placeholder="Ingresar código" >
+      </div>
+      <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.codigo.errors?.required">Ingresar el código del artículo</div>
+    </div>
+
+    <!--<div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+      <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+        <span class="required">Stock inicial</span>
+        <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Número de unidades disponibles"></i>
+      </label>
+      <input type="number" class="form-control form-control-solid" min="0" placeholder="" formControlName="stock" [class.form-select-danger]="submitted && f.stock.errors?.required">
+      <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.stock.errors?.required">Ingresar el stock disponible del artículo</div>
+    </div>-->
+
+    <div class="d-flex flex-column mb-7 fv-row" >
+      <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+        <span class="required">Categoria</span>
+        <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Categoria a la que pertenece el artículo"></i>
+      </label>
+      <select class="form-select form-select-solid" formControlName="idCategoria" required [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.idCategoria.errors?.required}">
+        <option [value]="null">--Seleccionar--</option>
+        <option *ngFor="let cat of collectionCat" [value]="cat.id">{{ cat.nombre }}</option>
+      </select>
+      <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.idCategoria.errors?.required">Seleccionar una categoria</div>
+    </div>
+
+    <div class="d-flex flex-column mb-7 fv-row" >
+      <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+        <span class="required">Unidad de medida</span>
+        <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Unidad de médida del artículo"></i>
+      </label>
+      <select class="form-select form-select-solid" formControlName="idUnidadMedida" required [ngClass]="{ 'form-select-danger is-invalid' : submitted && f.idUnidadMedida.errors?.required}">
+        <option [value]="null">--Seleccionar--</option>
+        <option *ngFor="let um of collectionUM" [value]="um.id">{{ um.nombreCorto }}</option>
+      </select>
+      <div class="fv-plugins-message-container invalid-feedback" *ngIf="submitted && f.idUnidadMedida.errors?.required">Seleccionar una unidad de medida</div>
+    </div>
+
+    <div class="d-flex flex-column mb-7 fv-row" >
+      <label class="d-flex align-items-center fs-6 fw-bold form-label mb-2">
+        <span class="required">Estado</span>
+        <i class="fas fa-exclamation-circle ms-2 fs-7" tooltip="Estado del artículo en el sistema"></i>
+      </label>
+      <select class="form-select form-select-solid" formControlName="idEstado" required >
+        <option [value]="0">Inactivo</option>
+        <option [value]="1">Activo</option>
+      </select>
+    </div>
+
+
+    <div class="text-center pt-15">
+      <button matRipple type="reset" class="btn btn-light me-3" (click)="bsModalRef.hide()">Cancelar</button>
+      <button [disabled]="loadingSubmit" matRipple type="submit" class="btn btn-primary" [attr.data-kt-indicator]="submitted && loadingSubmit">
+        <span class="indicator-label">Guardar</span>
+        <span class="indicator-progress">Porfavor espere...
+          <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+      </button>
+    </div>
+    <!--end::Actions-->
+    <div></div></form>
+  <!--end::Form-->
+</div>

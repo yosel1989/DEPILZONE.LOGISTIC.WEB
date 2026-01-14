@@ -1,0 +1,193 @@
+/** utils **/
+.f-w-500{
+  font-weight: 500 !important;
+}
+.rounded-grant {
+  border-radius: 15px !important;
+}
+.form-control-icon{
+  &.is-invalid{
+    background-position: right calc(0.375em + 3.375rem) center !important;
+  }
+}
+select{
+  cursor: pointer;
+}
+*{
+  scrollbar-width: thin;
+  scrollbar-color: #EFF2F5 transparent;
+}
+.modal + .modal {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+
+#kt_aside{
+  &.aside{
+    &.aside-minimize{
+      width: 100px;
+      transition: width 0.3s ease;
+    }
+  }
+}
+
+
+#kt_wrapper{
+  &.wrapper{
+    &.aside-minimize{
+      transition: padding-left 0.3s ease;
+      padding-left: 100px;
+    }
+  }
+}
+
+
+.menu-link *{
+  pointer-events: none;
+}
+
+/** table **/
+table{
+  border-collapse: inherit;
+  border-spacing: 0;
+  font-size: 14px !important;
+  &.nowrap{
+    td,th{
+      white-space: nowrap;
+    }
+  }
+  td,th{
+    padding-left: 24px !important;
+    font-size: 0.875em !important;
+  }
+
+  &.muted{
+    thead{
+      tr{
+        color: #A1A5B7 !important;
+        background-color: #F5F8FA !important;
+        height: auto;
+        th{
+          font-weight: 600;
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+          color: rgb(161, 165, 183);
+          border: none;
+          &.mat-column-expand{
+            padding: 0 !important;
+            min-width: 45px !important;
+            max-width: 45px !important;
+          }
+        }
+      }
+    }
+    tbody{
+      tr{
+        td{
+          border-bottom: 1px dashed transparent;
+          border-top: 1px dashed transparent;
+          //cursor: pointer;
+          color: #7e8299 !important;
+          text-transform: uppercase;
+          font-size: 0.875em !important;
+        }
+        &:hover{
+          background-color: rgba(245, 248, 250, 0.5);
+          td{
+            //border-color: rgba(0,0,0,.12);
+            color: #5d5e64 !important;
+          }
+        }
+        &.bg-lighten{
+          td{
+            color: #5d5e64 !important;
+          }
+        }
+        &:not(:first-child){
+          td{
+            border-top: 1px solid #F5F8FA;
+          }
+        }
+        &:last-child{
+          td{
+            border-bottom: 1px solid #F5F8FA;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+
+/** card **/
+.card{
+  &.card-table {
+    .table-responsive{
+      margin-left: -2.25rem;
+      margin-right: -2.25rem;
+    }
+    .card-footer{
+      padding: 0;
+    }
+    .card-body{
+      mat-paginator{
+        border-radius: 0 0 calc(0.85rem - 1px) calc(0.85rem - 1px);
+      }
+    }
+    mat-paginator{
+      margin-left: -2.25rem;
+      margin-right: -2.25rem;
+    }
+  }
+}
+
+/** select2 **/
+.select2-container{
+  z-index: 9999;
+}
+
+::ng-deep .select2-container--bootstrap5 .select2-dropdown .select2-results__option.select2-results__option--selected {
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 11'%3e%3cpath fill='%23FFFFFF' d='M4.89557 6.49823L2.79487 4.26513C2.26967 3.70683 1.38251 3.70683 0.857309 4.26513C0.375593 4.77721 0.375593 5.57574 0.857309 6.08781L4.74989 10.2257C5.14476 10.6455 5.81176 10.6455 6.20663 10.2257L13.1427 2.85252C13.6244 2.34044 13.6244 1.54191 13.1427 1.02984C12.6175 0.471537 11.7303 0.471536 11.2051 1.02984L6.06096 6.49823C5.74506 6.83403 5.21146 6.83403 4.89557 6.49823Z'/%3e%3c/svg%3e");
+  background-size: 0.8rem;
+  background-position: center right 1.25rem;
+  background-color: #04C8C8;
+  color: #FFFFFF;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/** form **/
+.form-select-danger{
+  &:focus,
+  &:active{
+    background-color: #FFF5F8 !important;
+    border-color: #FFF5F8 !important;
+  }
+  background-color: #FFF5F8 !important;
+  border-color: #FFF5F8 !important;
+}
+
+
+/** animations **/
+.spinner{
+  -webkit-animation: rotation .3s infinite linear;
+  -o-animation: rotation .3s infinite linear;
+  animation: rotation .3s infinite linear;
+}
+@keyframes rotation {
+  from{
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to{
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
